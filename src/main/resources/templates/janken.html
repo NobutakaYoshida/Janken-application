@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>じゃんけん</title>
+</head>
+<body>
+	<h2>じゃんけんをします。</h2>
+	<form th:action="@{/janken/battle}" method="post"
+		th:object="${jankenForm}">
+		<!--  <div th:errors="*{hitonote}" style="color:red"></div> -->
+		<span th:each="hitonoteE:${hitonoteMap}"> <label
+			th:for="hitonoteE+${hitonoteE.key}"> <input type="radio"
+				name="hitonote" th:id="hitonoteE+${hitonoteE.key}"
+				th:value="${hitonoteE.key}" th:text="${hitonoteE.value}">
+		</label>
+		</span> <br>
+		<button>結果</button>
+		<hr>
+		<div th:if="${winMessage != null}" th:text="${winMessage}"></div>
+		<div th:if="${loseMessage != null}" th:text="${loseMessage}"></div>
+		<div th:if="${drawMessage != null}" th:text="${drawMessage}"></div>
+	</form>
+</body>
+</html>
